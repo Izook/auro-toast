@@ -1,6 +1,6 @@
 # auro-toast
 
-`<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of ...
+`<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for notifying uses in an onobtrusive and temporary format.
 
 ## UI development browser support
 
@@ -39,32 +39,44 @@ import "@alaskaairux/auro-toast";
 **Reference component in HTML**
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Hello World! I am a toast!</auro-toast>
 ```
 
 ## Install bundled assets from CDN
 
-In cases where the project is not able to process JS assets, there are pre-processed assets available for use. Two bundles are available -- `auro-toast__bundled.js` for modern browsers and `auro-toast__bundled.es5.js` for legacy browsers (including IE11). 
+In cases where the project is not able to process JS assets, there are pre-processed assets available for use. Two bundles are available -- `auro-toast__bundled.js` for modern browsers and `auro-toast__bundled.es5.js` for legacy browsers (including IE11).
 
 Since the legacy bundle includes many polyfills that are not needed by modern browsers, we recommend you load these bundles using [differential serving](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/) so that the browser only loads the bundle it needs. To accomplish this, the script tag for the modern bundle should have `type="module"` and the script tag for the legacy bundle should have the `nomodule` attribute. See the example below.
 
 **NOTE:** Be sure to replace `:version` in the URL with the version of the asset you want.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@alaskaairux/design-tokens@:version/dist/tokens/CSSTokenProperties.css" />
-<link rel="stylesheet" href="https://unpkg.com/@alaskaairux/webcorestylesheets@:version/dist/bundled/baseline.css" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@alaskaairux/design-tokens@:version/dist/tokens/CSSTokenProperties.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@alaskaairux/webcorestylesheets@:version/dist/bundled/baseline.css"
+/>
 
-<script src="https://unpkg.com/@alaskaairux/auro-toast@:version/dist/auro-toast__bundled.js" type="module"></script>
-<script src="https://unpkg.com/@alaskaairux/auro-toast@:version/dist/auro-toast__bundled.es5.js" nomodule></script>
+<script
+  src="https://unpkg.com/@alaskaairux/auro-toast@:version/dist/auro-toast__bundled.js"
+  type="module"
+></script>
+<script
+  src="https://unpkg.com/@alaskaairux/auro-toast@:version/dist/auro-toast__bundled.es5.js"
+  nomodule
+></script>
 ```
 
 ## auro-toast use cases
 
 The `<auro-toast>` element should be used in situations where users may:
 
-* ...
-* ...
-* ...
+- ...
+- ...
+- ...
 
 ## API Code Examples
 
@@ -95,4 +107,5 @@ $ npm run serve
 Open [localhost:3001](http://localhost:3001/)
 
 ### Testing
+
 Automated tests are required for every Auro component. See `.\test\auro-toast.test.js` for the tests for this component. Run `npm test` to run the tests and check code coverage. Tests must pass and meet a certain coverage threshold to commit. See [the testing documentation](https://auro.alaskaair.com/support/tests) for more details.
