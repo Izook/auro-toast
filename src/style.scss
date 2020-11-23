@@ -10,26 +10,202 @@
 @import "./node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints";
 @import "./node_modules/@alaskaairux/webcorestylesheets/dist/core";
 
-// Support for auroElement styles
-// @import "./node_modules/@alaskaairux/webcorestylesheets/dist/auroElement/auroElement";
+#toast {
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: center;
+  overflow: hidden;
+  background-color: #fff;
 
-// container styles - defines the look of the outer custom component
-// :host {
-//   ...
-// }
+  height: auto;
+  min-height: 62px;
+  width: 360px;
 
-// layout styles - define any layout specifications for UI that is contained WITHIN the component
-// never define layout that would cause effect on element outside the scope of this component
+  margin: 5px 0;
+  transition: transform 0.5s;
+}
 
+#toast > div {
+  height: auto;
+}
 
-// component shape styles
-// .auro-toast {
-//   ...
-// }
+.timer {
+  padding: 5px;
+  padding-left: 0px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+}
 
-.testClass {
-  color:  var(--auro-color-border-error-on-light);
-  border: 1px solid var(--auro-color-border-error-on-light);
-  display: inline-block;
-  padding: var(--auro-text-body-size-default);
+.timerIcon {
+  position: relative;
+  display: block;
+  margin: auto;
+  margin-left: 5px;
+}
+
+#timerRemaining {
+  position: absolute;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.toastMessage {
+  flex-grow: 5;
+  text-align: left;
+  padding: 5px;
+}
+
+.toastDismiss {
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  color: inherit;
+  transition: background-color 1s;
+}
+
+.popped {
+  transform: translateX(0%);
+}
+
+.fadeout {
+  animation-name: fadeout;
+  animation-duration: 750ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+    transform: scaleX(0.25) scaleY(0.25);
+  }
+}
+
+/* ============================================= */
+/* =============== TYPE COLORING =============== */
+/* ============================================= */
+#toast.success {
+  color: var(--auro-color-alert-success-on-light);
+  border: 3px solid var(--auro-color-alert-success-on-light);
+
+  .timer {
+    background-color: var(--auro-color-brand-tropical-100);
+  }
+
+  #timerRemaining {
+    background-color: var(--auro-color-alert-success-on-dark);
+  }
+
+  .toastDismiss:hover {
+    background-color: var(--auro-color-brand-tropical-100);
+  }
+}
+
+#toast.info {
+  color: var(--auro-color-alert-notification-on-light);
+  border: 3px solid var(--auro-color-alert-notification-on-light);
+
+  .timer {
+    background-color: var(--auro-color-brand-breeze-100);
+  }
+
+  #timerRemaining {
+    background-color: var(--auro-color-alert-notification-on-dark);
+  }
+
+  .toastDismiss:hover {
+    background-color: var(--auro-color-brand-breeze-100);
+  }
+}
+
+#toast.warning {
+  color: var(--auro-color-alert-warning-on-light);
+  border: 3px solid var(--auro-color-alert-warning-on-light);
+
+  .timer {
+    background-color: var(--auro-color-brand-goldcoast-100);
+  }
+
+  #timerRemaining {
+    background-color: var(--auro-color-brand-goldcoast-300);
+  }
+
+  .toastDismiss:hover {
+    background-color: var(--auro-color-brand-goldcoast-100);
+  }
+}
+
+#toast.error {
+  color: var(--auro-color-alert-error-on-light);
+  border: 3px solid var(--auro-color-alert-error-on-light);
+
+  .timer {
+    background-color: var(--auro-color-brand-canyon-100);
+  }
+
+  #timerRemaining {
+    background-color: var(--auro-color-alert-error-on-dark);
+  }
+
+  .toastDismiss:hover {
+    background-color: var(--auro-color-brand-canyon-100);
+  }
+}
+
+/* ============================================= */
+/* ===============  POSITIONING  =============== */
+/* ============================================= */
+.toast-bottom-left {
+  transform: translateX(-100%);
+}
+
+.toast-bottom-right {
+  transform: translateX(100%);
+}
+
+.toast-top-left {
+  transform: translateX(-100%);
+}
+
+.toast-top-right {
+  transform: translateX(100%);
+}
+
+/* ============================================= */
+/* =================  TOASTER  ================= */
+/* ============================================= */
+#toaster {
+  position: absolute;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.toaster-bottom-left {
+  bottom: 15px;
+  left: 15px;
+  flex-direction: column-reverse;
+}
+
+.toaster-bottom-right {
+  bottom: 15px;
+  right: 15px;
+  flex-direction: column-reverse;
+}
+
+.toaster-top-left {
+  top: 15px;
+  left: 15px;
+  flex-direction: column;
+}
+
+.toaster-top-right {
+  top: 15px;
+  right: 15px;
+  flex-direction: column;
 }

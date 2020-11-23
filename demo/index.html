@@ -13,6 +13,7 @@
       import '@polymer/iron-demo-helpers/demo-snippet';
     </script>
     <script type="module" src="../src/auro-toast.js"></script>
+    <script type="module" src="../src/auro-toaster.js"></script>
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles"></style>
     </custom-style>
@@ -25,8 +26,44 @@
 
       <demo-snippet>
         <template>
-          <auro-toast cssClass="testClass">Hello World!</auro-toast>
-        </template>
+          <script>
+            let position = "bottom-left";
+            let positions = ["bottom-left", "bottom-right", "top-left", "top-right"];
+            function addToast(type) {
+              var auroToast = document.createElement('auro-toast');
+              var toastMessage = document.createTextNode('This is a dynamically created toast message!');
+              auroToast.setAttribute('duration', '3');
+              auroToast.setAttribute(type, 'true');
+              auroToast.setAttribute('persistent', 'true');
+              auroToast.setAttribute('position', position);
+              auroToast.appendChild(toastMessage);
+              document.getElementsByTagName('auro-toaster')[0].insertBefore(auroToast, document.getElementsByTagName('auro-toaster')[0].firstChild);
+            }
+            function updatePosition(newPosition) {
+              position = newPosition;
+              document.getElementsByTagName('auro-toaster')[0].setAttribute('position', position);
+            }
+            function clearToaster() {
+              document.getElementsByTagName('auro-toaster')[0].setAttribute('clear', true);
+            }
+          </script>
+
+          <h1>TYPE</h1>
+          <button onclick="addToast('success', 'top-left')">SUCCESS TOAST</button>
+          <button onclick="addToast('info', 'top-left')">INFO TOAST</button>
+          <button onclick="addToast('warning', 'top-left')">WARNING TOAST</button>
+          <button onclick="addToast('error', 'top-left')">ERROR TOAST</button>
+          <h2>POSITION</h2>
+          <button onclick="updatePosition('top-left')">TOP LEFT</button>
+          <button onclick="updatePosition('top-right')">TOP RIGHT</button>
+          <button onclick="updatePosition('bottom-left')">BOTTOM LEFT</button>
+          <button onclick="updatePosition('bottom-right')">BOTTOM RIGHT</button>
+          <h3>ACTIONS</h3>
+          <button onClick="clearToaster()">CLEAR TOASTER</button>
+
+          <div class="container" style="position: relative; width: 100%; height: 500px;">          
+            <auro-toaster></auro-toaster>
+          </div>        </template>
       </demo-snippet>
     </div>
   </body>
