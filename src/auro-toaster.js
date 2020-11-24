@@ -48,11 +48,11 @@ class AuroToaster extends LitElement {
 
   updatePosition() {
     const positions = [
-"top-left",
-"top-right",
-"bottom-left",
-"bottom-right"
-];
+      "top-left",
+      "top-right",
+      "bottom-left",
+      "bottom-right"
+    ];
 
     if (!positions.includes(this.position)) {
       this.position = "bottom-left";

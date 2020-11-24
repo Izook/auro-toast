@@ -10,12 +10,12 @@ import { LitElement, html, css } from "lit-element";
 import "focus-visible/dist/focus-visible.min.js";
 import styleCss from "./style-css.js";
 
-// Import Auro Icons
-import xIcon from "@alaskaairux/icons/dist/icons/interface/x-lg_es6";
-import checkmarkIcon from "@alaskaairux/icons/dist/icons/interface/checkmark-lg_es6";
-import infoIcon from "@alaskaairux/icons/dist/icons/alert/information-stroke_es6";
-import warningIcon from "@alaskaairux/icons/dist/icons/alert/warning-stroke_es6";
-import errorIcon from "@alaskaairux/icons/dist/icons/alert/error_es6";
+// Import Icons
+import dismiss from "@alaskaairux/icons/dist/icons/interface/x-lg_es6";
+import success from "@alaskaairux/icons/dist/icons/interface/checkmark-lg_es6";
+import information from "@alaskaairux/icons/dist/icons/alert/information-stroke_es6";
+import warning from "@alaskaairux/icons/dist/icons/alert/warning-stroke_es6";
+import error from "@alaskaairux/icons/dist/icons/alert/error_es6";
 
 // Timing constants
 const DELAY = 100,
@@ -36,11 +36,11 @@ const DELAY = 100,
 class AuroToast extends LitElement {
   constructor() {
     super();
-    this.getIconSVGs();
 
     this.timeOuts = [];
     this.type = "success";
     this.svg = this.checkmarkIconSVG;
+    this.dismissIcon = this.generateIconHtml(dismiss.svg);
 
     this.setDefaultProperties();
   }
@@ -76,9 +76,16 @@ class AuroToast extends LitElement {
     `;
   }
 
-  updated() {
-    this.updateType();
-    this.updatePosition();
+  /**
+   * @private Internal function to generate the HTML for the icon to use
+   * @param {string} svgContent - The imported svg icon
+   * @returns {TemplateResult} - The html template for the icon
+   */
+  generateIconHtml(svgContent) {
+    const dom = new DOMParser().parseFromString(svgContent, 'text/html'),
+    svg = dom.body.firstChild;
+
+   return svg;
   }
 
   firstUpdated() {
@@ -98,31 +105,6 @@ class AuroToast extends LitElement {
     }
   }
 
-  getIconSVGs() {
-    this.domParser = new DOMParser();
-
-    this.xIconSVG = this.domParser.parseFromString(
-      xIcon.svg,
-      "text/html"
-    ).body.firstChild;
-    this.checkmarkIconSVG = this.domParser.parseFromString(
-      checkmarkIcon.svg,
-      "text/html"
-    ).body.firstChild;
-    this.infoIconSVG = this.domParser.parseFromString(
-      infoIcon.svg,
-      "text/html"
-    ).body.firstChild;
-    this.warningIconSVG = this.domParser.parseFromString(
-      warningIcon.svg,
-      "text/html"
-    ).body.firstChild;
-    this.errorIconSVG = this.domParser.parseFromString(
-      errorIcon.svg,
-      "text/html"
-    ).body.firstChild;
-  }
-
   dismissToast() {
     this.shadowRoot.getElementById("toast").classList.add("fadeout");
     setTimeout(() => {
@@ -134,37 +116,36 @@ class AuroToast extends LitElement {
   }
 
   updateType() {
-    this.type = "success";
     this.type = this.info ? "info" : this.type;
     this.type = this.warning ? "warning" : this.type;
     this.type = this.error ? "error" : this.type;
 
     switch (this.type) {
       case "success":
-        this.svg = this.checkmarkIconSVG;
+        this.svg = this.generateIconHtml(success.svg);
         break;
       case "info":
-        this.svg = this.infoIconSVG;
+        this.svg = this.generateIconHtml(information.svg);
         break;
       case "warning":
-        this.svg = this.warningIconSVG;
+        this.svg = this.generateIconHtml(warning.svg);
         break;
       case "error":
-        this.svg = this.errorIconSVG;
+        this.svg = this.generateIconHtml(error.svg);
         break;
       default:
-        this.svg = this.infoIconSVG;
+        this.svg = this.generateIconHtml(information.svg);
         break;
     }
   }
 
   updatePosition() {
     const positions = [
-"top-left",
-"top-right",
-"bottom-left",
-"bottom-right"
-];
+      "top-left",
+      "top-right",
+      "bottom-left",
+      "bottom-right"
+    ];
 
     if (!positions.includes(this.position)) {
       this.position = "bottom-left";
