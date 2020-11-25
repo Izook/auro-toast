@@ -41,6 +41,10 @@ class AuroToaster extends LitElement {
     `;
   }
 
+  /**
+   * @private function to update the position of the toast based on attributes
+   * @returns {void}
+   */
   updatePosition() {
     const positions = [
       "top-left",
@@ -54,6 +58,10 @@ class AuroToaster extends LitElement {
     }
   }
 
+  /**
+   * @private function to dismiss all of the toast children
+   * @returns {void}
+   */
   clearChildren() {
     if (this.clear) {
       this.childNodes.forEach((node) => {
