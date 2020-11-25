@@ -160,19 +160,11 @@
 /* ============================================= */
 /* ===============  POSITIONING  =============== */
 /* ============================================= */
-.toast-bottom-left {
+.toast-left {
   transform: translateX(-100%);
 }
 
-.toast-bottom-right {
-  transform: translateX(100%);
-}
-
-.toast-top-left {
-  transform: translateX(-100%);
-}
-
-.toast-top-right {
+.toast-right {
   transform: translateX(100%);
 }
 

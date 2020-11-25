@@ -80,10 +80,11 @@ class AuroToaster extends LitElement {
    * @returns {void}
    */
   addToast(toastContent, type = "success", attributes = {}) {
-    const auroToast = document.createElement('auro-toast');
+    const auroToast = document.createElement('auro-toast'),
+     toastPosition = this.position.includes("left") ? "left" : "right";
 
     auroToast.setAttribute(type, 'true');
-    auroToast.setAttribute('position', this.position);
+    auroToast.setAttribute('position', toastPosition);
 
     Object.keys(attributes).forEach((key) => {
       auroToast.setAttribute(key, attributes[key]);

@@ -28,7 +28,7 @@ const DELAY = 100,
  * @attr {Boolean} info - Styles toast as informational.
  * @attr {Boolean} warning - Styles toast as warning.
  * @attr {Boolean} error - Styles toast as error.
- * @attr {String} position - Sets corner position of toast. ["top-left", "top-right", "bottom-left", "bottom-right"]
+ * @attr {String} position - Sets entry position of toast. ["left", "right"]
  * @attr {Number} duration - Lifetime of the toast (in seconds).
  * @attr {Boolean} dismiss - Set attribute to dismiss the toast.
  * @attr {Boolean} persistent - Set true if you do not want the toast to automatically dismiss itself.
@@ -76,7 +76,7 @@ class AuroToast extends LitElement {
     this.warning = false;
     this.error = false;
     this.duration = 5;
-    this.position = "bottom-left";
+    this.position = "left";
     this.dismiss = false;
     this.persistent = false;
   }
@@ -183,14 +183,12 @@ class AuroToast extends LitElement {
    */
   updatePosition() {
     const positions = [
-      "top-left",
-      "top-right",
-      "bottom-left",
-      "bottom-right"
+      "left",
+      "right",
     ];
 
     if (!positions.includes(this.position)) {
-      this.position = "bottom-left";
+      this.position = "left";
     }
   }
 
