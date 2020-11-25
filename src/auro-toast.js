@@ -34,17 +34,37 @@ const DELAY = 100,
  * @attr {Boolean} persistent - Set true if you do not want the toast to automatically dismiss itself.
  */
 class AuroToast extends LitElement {
+
   constructor() {
     super();
 
+    /**
+     * @private internal variable
+     */
     this.timeOuts = [];
+
+    /**
+     * @private internal variable
+     */
     this.type = "success";
-    this.svg = this.checkmarkIconSVG;
+
+    /**
+     * @private internal variable
+     */
+    this.svg = this.generateIconHtml(success.svg);
+
+    /**
+     * @private internal variable
+     */
     this.dismissIcon = this.generateIconHtml(dismiss.svg);
 
     this.setDefaultProperties();
   }
 
+  /**
+   * @private function to set default properties within the constructor
+   * @returns {void}
+   */
   setDefaultProperties() {
     // default properties
     this.info = false;
@@ -88,8 +108,10 @@ class AuroToast extends LitElement {
    return svg;
   }
 
+
+  // This function applies styles after the components loads to animate the component and
+  // it starts its dismissal timer.
   firstUpdated() {
-    // place in setInterval after short delay so transition picks up after styles load
     setTimeout(() => {
       this.shadowRoot.getElementById("toast").style.transform = `translateX(0%)`;
     }, DELAY);
@@ -105,6 +127,10 @@ class AuroToast extends LitElement {
     }
   }
 
+  /**
+   * @private function to dismiss toast by animating dissapearance and removing component from DOM
+   * @returns {void}
+   */
   dismissToast() {
     this.shadowRoot.getElementById("toast").classList.add("fadeout");
     setTimeout(() => {
@@ -115,6 +141,10 @@ class AuroToast extends LitElement {
     }, DISMISS_DURATION);
   }
 
+  /**
+   * @private function to update the type of the toast based on attributes 
+   * @returns {void}
+   */
   updateType() {
     this.type = this.info ? "info" : this.type;
     this.type = this.warning ? "warning" : this.type;
@@ -139,6 +169,10 @@ class AuroToast extends LitElement {
     }
   }
 
+  /**
+   * @private function to update the position of the toast based on attributes 
+   * @returns {void}
+   */
   updatePosition() {
     const positions = [
       "top-left",
