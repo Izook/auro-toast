@@ -142,7 +142,7 @@ class AuroToast extends LitElement {
   }
 
   /**
-   * @private function to update the type of the toast based on attributes 
+   * @private function to update the type of the toast based on attributes
    * @returns {void}
    */
   updateType() {
@@ -170,7 +170,7 @@ class AuroToast extends LitElement {
   }
 
   /**
-   * @private function to update the position of the toast based on attributes 
+   * @private function to update the position of the toast based on attributes
    * @returns {void}
    */
   updatePosition() {
