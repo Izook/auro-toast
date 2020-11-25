@@ -137,6 +137,7 @@ class AuroToast extends LitElement {
    * @returns {void}
    */
   dismissToast() {
+    /* istanbul ignore else */
     if (!this.dismissed) {
       this.dismissed = true;
       this.shadowRoot.getElementById("toast").classList.add("fadeout");
@@ -171,6 +172,7 @@ class AuroToast extends LitElement {
       case "error":
         this.svg = this.generateIconHtml(error.svg);
         break;
+      /* istanbul ignore next */
       default:
         this.svg = this.generateIconHtml(information.svg);
         break;
@@ -196,9 +198,6 @@ class AuroToast extends LitElement {
   render() {
     this.updateType();
     this.updatePosition();
-    if (this.dismiss) {
-      this.dismissToast();
-    }
 
     return html`
       <div id="toast" class="${this.type} toast-${this.position}">
@@ -219,7 +218,15 @@ class AuroToast extends LitElement {
       </div>
     `;
   }
+
+  // function that is called when the elements DOM has been updated and rendered
+  updated() {
+    if (this.dismiss) {
+      this.dismissToast();
+    }
+  }
 }
+
 
 /* istanbul ignore else */
 // define the name of the custom component(s)
