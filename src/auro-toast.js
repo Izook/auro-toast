@@ -208,7 +208,7 @@ class AuroToast extends LitElement {
           @click="${this.dismissToast}"
           aria-label="Dismiss toast notification."
         >
-          ${this.xIconSVG}
+          ${this.dismissIcon}
         </button>
       </div>
     `;
