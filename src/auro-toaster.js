@@ -72,6 +72,27 @@ class AuroToaster extends LitElement {
     }
   }
 
+  /**
+   * @public function to add a generic toast notification to the toaster
+   * @param {HTMLElement} toastContent - The message to attach to the toast
+   * @param {string} type - the type of toast notification to add (optional)
+   * @param {object} attributes - attributes that you want to override in the toast, e.g. duration or persistent. (optional)
+   * @returns {void}
+   */
+  addToast(toastContent, type = "success", attributes = {}) {
+    const auroToast = document.createElement('auro-toast');
+
+    auroToast.setAttribute(type, 'true');
+    auroToast.setAttribute('position', this.position);
+
+    Object.keys(attributes).forEach((key) => {
+      auroToast.setAttribute(key, attributes[key]);
+    });
+
+    auroToast.appendChild(toastContent);
+    this.insertBefore(auroToast, this.firstChild);
+  }
+
   // function that renders the HTML and CSS into  the scope of the component
   render() {
     this.updatePosition();

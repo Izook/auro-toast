@@ -30,14 +30,7 @@
             let position = "bottom-left";
             let positions = ["bottom-left", "bottom-right", "top-left", "top-right"];
             function addToast(type) {
-              var auroToast = document.createElement('auro-toast');
-              var toastMessage = document.createTextNode('This is a dynamically created toast message!');
-              auroToast.setAttribute('duration', '3');
-              auroToast.setAttribute(type, 'true');
-              auroToast.setAttribute('persistent', 'true');
-              auroToast.setAttribute('position', position);
-              auroToast.appendChild(toastMessage);
-              document.getElementsByTagName('auro-toaster')[0].insertBefore(auroToast, document.getElementsByTagName('auro-toaster')[0].firstChild);
+              document.getElementById("toaster").addToast(document.createTextNode("This is a toast message!"), type, {});
             }
             function updatePosition(newPosition) {
               position = newPosition;
@@ -62,8 +55,9 @@
           <button onClick="clearToaster()">CLEAR TOASTER</button>
 
           <div class="container" style="position: relative; width: 100%; height: 500px;">          
-            <auro-toaster></auro-toaster>
-          </div>        </template>
+            <auro-toaster id="toaster"></auro-toaster>
+          </div>        
+        </template>
       </demo-snippet>
     </div>
   </body>
