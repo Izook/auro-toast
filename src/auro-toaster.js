@@ -41,11 +41,6 @@ class AuroToaster extends LitElement {
     `;
   }
 
-  updated() {
-    this.updatePosition();
-    this.clearChildren();
-  }
-
   updatePosition() {
     const positions = [
       "top-left",
@@ -65,7 +60,7 @@ class AuroToaster extends LitElement {
         node.setAttribute("dismiss", "true");
       });
       this.clear = false;
-      this.setAttribute("clear", false);
+      this.removeAttribute("clear");
     }
   }
 
