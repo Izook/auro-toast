@@ -14,7 +14,6 @@ import styleCss from "./style-css.js";
  * auro-toast provides users with an optional container to position and display auro-toasts.
  *
  * @attr {String} position - Sets corner position of toaster. ["top-left", "top-right", "bottom-left", "bottom-right"]
- * @attr {Boolean} clear - Set attribute to dismiss all of the toasts within the toaster.
  */
 
 class AuroToaster extends LitElement {
@@ -23,7 +22,6 @@ class AuroToaster extends LitElement {
 
     // default properties
     this.position = "bottom-left";
-    this.clear = "false";
   }
 
   // function to define props used within the scope of this component
@@ -31,7 +29,6 @@ class AuroToaster extends LitElement {
     return {
       ...super.properties,
       position: { type: String },
-      clear: { type: Boolean },
     };
   }
 
@@ -59,17 +56,15 @@ class AuroToaster extends LitElement {
   }
 
   /**
-   * @private function to dismiss all of the toast children
+   * @public function to dismiss all of the toast children
    * @returns {void}
    */
   clearChildren() {
-    if (this.clear) {
-      this.childNodes.forEach((node) => {
-        node.setAttribute("dismiss", "true");
-      });
-      this.clear = false;
-      this.removeAttribute("clear");
-    }
+    this.childNodes.forEach((node) => {
+      node.setAttribute("dismiss", "true");
+    });
+    this.clear = false;
+    this.removeAttribute("clear");
   }
 
   /**
@@ -97,7 +92,6 @@ class AuroToaster extends LitElement {
   // function that renders the HTML and CSS into  the scope of the component
   render() {
     this.updatePosition();
-    this.clearChildren();
 
     return html`
       <div id="toaster" class="toaster-${this.position}">
