@@ -58,6 +58,11 @@ class AuroToast extends LitElement {
      */
     this.dismissIcon = this.generateIconHtml(dismiss.svg);
 
+    /**
+     * @private internal variable
+     */
+    this.dismissed = false;
+
     this.setDefaultProperties();
   }
 
@@ -132,13 +137,16 @@ class AuroToast extends LitElement {
    * @returns {void}
    */
   dismissToast() {
-    this.shadowRoot.getElementById("toast").classList.add("fadeout");
-    setTimeout(() => {
-      this.timeOuts.forEach((timeoutId) => {
-        clearTimeout(timeoutId);
-      });
-      this.parentElement.removeChild(this);
-    }, DISMISS_DURATION);
+    if (!this.dismissed) {
+      this.dismissed = true;
+      this.shadowRoot.getElementById("toast").classList.add("fadeout");
+      setTimeout(() => {
+        this.timeOuts.forEach((timeoutId) => {
+          clearTimeout(timeoutId);
+        });
+        this.parentNode.removeChild(this);
+      }, DISMISS_DURATION);
+    }
   }
 
   /**
