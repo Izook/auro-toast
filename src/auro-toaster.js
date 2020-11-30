@@ -44,11 +44,11 @@ class AuroToaster extends LitElement {
    */
   updatePosition() {
     const positions = [
-      "top-left",
-      "top-right",
-      "bottom-left",
-      "bottom-right"
-    ];
+"top-left",
+"top-right",
+"bottom-left",
+"bottom-right"
+];
 
     if (!positions.includes(this.position)) {
       this.position = "bottom-left";
@@ -63,8 +63,6 @@ class AuroToaster extends LitElement {
     this.childNodes.forEach((node) => {
       node.setAttribute("dismiss", "true");
     });
-    this.clear = false;
-    this.removeAttribute("clear");
   }
 
   /**
@@ -75,11 +73,11 @@ class AuroToaster extends LitElement {
    * @returns {void}
    */
   addToast(toastContent, type = "success", attributes = {}) {
-    const auroToast = document.createElement('auro-toast'),
-     toastPosition = this.position.includes("left") ? "left" : "right";
+    const auroToast = document.createElement("auro-toast"),
+      toastPosition = this.position.includes("left") ? "left" : "right";
 
-    auroToast.setAttribute(type, 'true');
-    auroToast.setAttribute('position', toastPosition);
+    auroToast.setAttribute(type, "true");
+    auroToast.setAttribute("position", toastPosition);
 
     Object.keys(attributes).forEach((key) => {
       auroToast.setAttribute(key, attributes[key]);
