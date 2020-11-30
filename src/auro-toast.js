@@ -34,7 +34,6 @@ const DELAY = 100,
  * @attr {Boolean} persistent - Set true if you do not want the toast to automatically dismiss itself.
  */
 class AuroToast extends LitElement {
-
   constructor() {
     super();
 
@@ -107,12 +106,11 @@ class AuroToast extends LitElement {
    * @returns {TemplateResult} - The html template for the icon
    */
   generateIconHtml(svgContent) {
-    const dom = new DOMParser().parseFromString(svgContent, 'text/html'),
-    svg = dom.body.firstChild;
+    const dom = new DOMParser().parseFromString(svgContent, "text/html"),
+      svg = dom.body.firstChild;
 
-   return svg;
+    return svg;
   }
-
 
   // This function applies styles after the components loads to animate the component and
   // it starts its dismissal timer.
@@ -185,9 +183,9 @@ class AuroToast extends LitElement {
    */
   updatePosition() {
     const positions = [
-      "left",
-      "right",
-    ];
+"left",
+"right"
+];
 
     if (!positions.includes(this.position)) {
       this.position = "left";
@@ -200,7 +198,7 @@ class AuroToast extends LitElement {
     this.updatePosition();
 
     return html`
-      <div id="toast" class="${this.type} toast-${this.position}">
+      <div id="toast" class="${this.type} toast-${this.position}" role="log">
         <div class="timer">
           <div id="timerRemaining"></div>
           <div class="timerIcon">${this.svg}</div>
@@ -226,7 +224,6 @@ class AuroToast extends LitElement {
     }
   }
 }
-
 
 /* istanbul ignore else */
 // define the name of the custom component(s)

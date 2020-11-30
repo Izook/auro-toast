@@ -92,7 +92,12 @@ class AuroToaster extends LitElement {
     this.updatePosition();
 
     return html`
-      <div id="toaster" class="toaster-${this.position}">
+      <div
+        id="toaster"
+        class="toaster-${this.position}"
+        role="region"
+        aria-live="polite"
+      >
         <slot></slot>
       </div>
     `;
