@@ -106,7 +106,6 @@ describe("auro-toaster", () => {
       });
 
       const toast = el.querySelector("auro-toast");
-      console.log("toast");
 
       await expect(el.children.length).to.be.equal(1);
       await expect(toast.getAttribute("persistent")).to.be.equal("true");
