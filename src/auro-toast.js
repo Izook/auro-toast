@@ -28,7 +28,6 @@ const DELAY = 100,
  * @attr {Boolean} info - Styles toast as informational.
  * @attr {Boolean} warning - Styles toast as warning.
  * @attr {Boolean} error - Styles toast as error.
- * @attr {String} position - Sets entry position of toast. ["left", "right"]
  * @attr {Number} duration - Lifetime of the toast (in seconds).
  * @attr {Boolean} dismiss - Set attribute to dismiss the toast.
  * @attr {Boolean} persistent - Set true if you do not want the toast to automatically dismiss itself.
@@ -65,6 +64,7 @@ class AuroToast extends LitElement {
     this.setDefaultProperties();
   }
 
+
   /**
    * @private function to set default properties within the constructor
    * @returns {void}
@@ -75,10 +75,10 @@ class AuroToast extends LitElement {
     this.warning = false;
     this.error = false;
     this.duration = 5;
-    this.position = "left";
     this.dismiss = false;
     this.persistent = false;
   }
+
 
   // function to define props used within the scope of this component
   static get properties() {
@@ -87,18 +87,19 @@ class AuroToast extends LitElement {
       info: { type: Boolean },
       warning: { type: Boolean },
       error: { type: Boolean },
-      position: { type: String },
       duration: { type: Number },
       dismiss: { type: Boolean },
       persistent: { type: Boolean },
     };
   }
 
+
   static get styles() {
     return css`
       ${styleCss}
     `;
   }
+
 
   /**
    * @private Internal function to generate the HTML for the icon to use
@@ -112,23 +113,25 @@ class AuroToast extends LitElement {
     return svg;
   }
 
+
   // This function applies styles after the components loads to animate the component and
   // it starts its dismissal timer.
   firstUpdated() {
     setTimeout(() => {
-      this.shadowRoot.getElementById("toast").style.transform = `translateX(0%)`;
+      this.shadowRoot.querySelector(".toast").style.transform = `translateX(0%)`;
     }, DELAY);
     if (!this.persistent) {
       setTimeout(() => {
-        this.shadowRoot.getElementById("timerRemaining").style.transition = `height ${this.duration}s linear`;
-        this.shadowRoot.getElementById("timerRemaining").style.height = `0%`;
-        this.shadowRoot.getElementById("toast").style.transform = `translateX(0%)`;
+        this.shadowRoot.querySelector(".timeRemaining").style.transition = `height ${this.duration}s linear`;
+        this.shadowRoot.querySelector(".timeRemaining").style.height = `0%`;
+        this.shadowRoot.querySelector(".toast").style.transform = `translateX(0%)`;
       }, DELAY);
       this.timeOuts.push(setTimeout(() => {
           this.dismissToast();
         }, this.duration * MS));
     }
   }
+
 
   /**
    * @private function to dismiss toast by animating dissapearance and removing component from DOM
@@ -138,7 +141,7 @@ class AuroToast extends LitElement {
     /* istanbul ignore else */
     if (!this.dismissed) {
       this.dismissed = true;
-      this.shadowRoot.getElementById("toast").classList.add("fadeout");
+      this.shadowRoot.querySelector(".toast").classList.add("isCleared");
       setTimeout(() => {
         this.timeOuts.forEach((timeoutId) => {
           clearTimeout(timeoutId);
@@ -147,6 +150,7 @@ class AuroToast extends LitElement {
       }, DISMISS_DURATION);
     }
   }
+
 
   /**
    * @private function to update the type of the toast based on attributes
@@ -177,37 +181,21 @@ class AuroToast extends LitElement {
     }
   }
 
-  /**
-   * @private function to update the position of the toast based on attributes
-   * @returns {void}
-   */
-  updatePosition() {
-    const positions = [
-"left",
-"right"
-];
-
-    if (!positions.includes(this.position)) {
-      this.position = "left";
-    }
-  }
-
   // function that renders the HTML and CSS into  the scope of the component
   render() {
     this.updateType();
-    this.updatePosition();
 
     return html`
-      <div id="toast" class="${this.type} toast-${this.position}" role="log">
+      <div id="toast" class="toast toast--${this.type}" role="log">
         <div class="timer">
-          <div id="timerRemaining"></div>
-          <div class="timerIcon">${this.svg}</div>
+          <div class="timeRemaining"></div>
+          <div class="icon">${this.svg}</div>
         </div>
-        <div class="toastMessage">
+        <div class="message">
           <slot></slot>
         </div>
         <button
-          class="toastDismiss"
+          class="dismissButton"
           @click="${this.dismissToast}"
           aria-label="Dismiss toast notification."
         >

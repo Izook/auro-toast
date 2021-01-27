@@ -20,10 +20,10 @@ describe("auro-toast", () => {
       it("not specified", async () => {
         const el = await fixture(html`<auro-toast></auro-toast>`);
         const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-        const toastIcon = root.querySelector(".timerIcon");
+        const toast = root.querySelector(".toast");
+        const toastIcon = root.querySelector(".icon");
 
-        await expect([...toast.classList]).to.contain("success");
+        await expect([...toast.classList]).to.contain("toast--success");
         await expect(toastIcon.innerHTML).to.contain(
           "Checkmark display indicator"
         );
@@ -32,10 +32,10 @@ describe("auro-toast", () => {
       it("success", async () => {
         const el = await fixture(html`<auro-toast success></auro-toast>`);
         const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-        const toastIcon = root.querySelector(".timerIcon");
+        const toast = root.querySelector(".toast");
+        const toastIcon = root.querySelector(".icon");
 
-        await expect([...toast.classList]).to.contain("success");
+        await expect([...toast.classList]).to.contain("toast--success");
         await expect(toastIcon.innerHTML).to.contain(
           "Checkmark display indicator"
         );
@@ -44,73 +44,34 @@ describe("auro-toast", () => {
       it("info", async () => {
         const el = await fixture(html`<auro-toast info></auro-toast>`);
         const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-        const toastIcon = root.querySelector(".timerIcon");
+        const toast = root.querySelector(".toast");
+        const toastIcon = root.querySelector(".icon");
 
-        await expect([...toast.classList]).to.contain("info");
+        await expect([...toast.classList]).to.contain("toast--info");
         await expect(toastIcon.innerHTML).to.contain("Information");
       });
 
       it("warning", async () => {
         const el = await fixture(html`<auro-toast warning></auro-toast>`);
         const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-        const toastIcon = root.querySelector(".timerIcon");
+        const toast = root.querySelector(".toast");
+        const toastIcon = root.querySelector(".icon");
 
-        await expect([...toast.classList]).to.contain("warning");
+        await expect([...toast.classList]).to.contain("toast--warning");
         await expect(toastIcon.innerHTML).to.contain("Warning");
       });
 
       it("error", async () => {
         const el = await fixture(html`<auro-toast error></auro-toast>`);
         const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-        const toastIcon = root.querySelector(".timerIcon");
+        const toast = root.querySelector(".toast");
+        const toastIcon = root.querySelector(".icon");
 
-        await expect([...toast.classList]).to.contain("error");
+        await expect([...toast.classList]).to.contain("toast--error");
         await expect(toastIcon.innerHTML).to.contain("Error");
       });
     });
 
-    describe("when position is ", () => {
-      it("not set", async () => {
-        const el = await fixture(html`<auro-toast></auro-toast>`);
-        const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-
-        await expect([...toast.classList]).to.contain("toast-left");
-      });
-
-      it("invalid", async () => {
-        const el = await fixture(
-          html`<auro-toast position="absolute"></auro-toast>`
-        );
-        const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-
-        await expect([...toast.classList]).to.contain("toast-left");
-      });
-
-      it("left", async () => {
-        const el = await fixture(
-          html`<auro-toast position="left"></auro-toast>`
-        );
-        const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-
-        await expect([...toast.classList]).to.contain("toast-left");
-      });
-
-      it("right", async () => {
-        const el = await fixture(
-          html`<auro-toast position="right"></auro-toast>`
-        );
-        const root = el.shadowRoot;
-        const toast = root.querySelector("#toast");
-
-        await expect([...toast.classList]).to.contain("toast-right");
-      });
-    });
   });
 
   describe("handles dismissal", () => {
@@ -119,9 +80,9 @@ describe("auro-toast", () => {
         html`<div><auro-toast dismiss></auro-toast></div>`
       );
       const root = el.querySelector("auro-toast").shadowRoot;
-      const toast = root.querySelector("#toast");
+      const toast = root.querySelector(".toast");
 
-      await expect([...toast.classList]).to.contain("fadeout");
+      await expect([...toast.classList]).to.contain("isCleared");
       await expect(el.children.length).to.be.equal(1);
 
       await aTimeout(300);
@@ -134,11 +95,11 @@ describe("auro-toast", () => {
         html`<div><auro-toast duration="1"></auro-toast></div>`
       );
       const root = el.querySelector("auro-toast").shadowRoot;
-      const toast = root.querySelector("#toast");
+      const toast = root.querySelector(".toast");
 
       await aTimeout(1000);
 
-      await expect([...toast.classList]).to.contain("fadeout");
+      await expect([...toast.classList]).to.contain("isCleared");
       await expect(el.children.length).to.be.equal(1);
 
       await aTimeout(300);
@@ -151,11 +112,11 @@ describe("auro-toast", () => {
         html`<div><auro-toast duration="1" persistent></auro-toast></div>`
       );
       const root = el.querySelector("auro-toast").shadowRoot;
-      const toast = root.querySelector("#toast");
+      const toast = root.querySelector(".toast");
 
       await aTimeout(1000);
 
-      await expect([...toast.classList]).to.not.contain("fadeout");
+      await expect([...toast.classList]).to.not.contain("isCleared");
       await expect(el.children.length).to.be.equal(1);
 
       await aTimeout(300);
