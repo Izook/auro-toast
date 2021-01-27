@@ -9,8 +9,8 @@
     <title>Auro Web Component Generator | auro-toast custom element</title>
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script type="module">
-      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
-      import '@polymer/iron-demo-helpers/demo-snippet';
+      import "@polymer/iron-demo-helpers/demo-pages-shared-styles";
+      import "@polymer/iron-demo-helpers/demo-snippet";
     </script>
     <script type="module" src="../src/auro-toast.js"></script>
     <script type="module" src="../src/auro-toaster.js"></script>
@@ -26,37 +26,18 @@
 
       <demo-snippet>
         <template>
-          <script>
-            let position = "bottom-left";
-            let positions = ["bottom-left", "bottom-right", "top-left", "top-right"];
-            function addToast(type) {
-              document.getElementById("toaster").addToast(document.createTextNode("This is a toast message!"), type, {});
-            }
-            function updatePosition(newPosition) {
-              position = newPosition;
-              document.getElementsByTagName('auro-toaster')[0].setAttribute('position', position);
-            }
-            function clearToaster() {
-              document.getElementById("toaster").clearChildren();
-            }
-          </script>
-
-          <h1>TYPE</h1>
-          <button onclick="addToast('success', 'top-left')">SUCCESS TOAST</button>
-          <button onclick="addToast('info', 'top-left')">INFO TOAST</button>
-          <button onclick="addToast('warning', 'top-left')">WARNING TOAST</button>
-          <button onclick="addToast('error', 'top-left')">ERROR TOAST</button>
-          <h2>POSITION</h2>
-          <button onclick="updatePosition('top-left')">TOP LEFT</button>
-          <button onclick="updatePosition('top-right')">TOP RIGHT</button>
-          <button onclick="updatePosition('bottom-left')">BOTTOM LEFT</button>
-          <button onclick="updatePosition('bottom-right')">BOTTOM RIGHT</button>
-          <h3>ACTIONS</h3>
-          <button onClick="clearToaster()">CLEAR TOASTER</button>
-
-          <div class="container" style="position: relative; width: 100%; height: 500px;">
-            <auro-toaster id="toaster"></auro-toaster>
-          </div>        
+          <h3>Default Toast</h3>
+          <auro-toast persistent>I am the default persistent toast!</auro-toast>
+          <auro-toast>I am the default vanishing toast!</auro-toast>
+          <h3>Informational Toast</h3>
+          <auro-toast info persistent>I am an informational persistent toast!</auro-toast>
+          <auro-toast info>I am an informational vanishing toast!</auro-toast>
+          <h3>Warning Toast</h3>
+          <auro-toast warning persistent>I am a warning persistent toast!</auro-toast>
+          <auro-toast warning>I am a warning vanishing toast!</auro-toast>
+          <h3>Error Toast</h3>
+          <auro-toast error persistent>I am an error persistent toast!</auro-toast>
+          <auro-toast error>I am an error vanishing toast!</auro-toast>
         </template>
       </demo-snippet>
     </div>
