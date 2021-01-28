@@ -46,19 +46,6 @@ describe("auro-toaster", () => {
     });
   });
 
-  it("can clear toasts manually", async () => {
-    const el = await fixture(
-      html`<auro-toaster><auro-toast></auro-toast></auro-toaster>`
-    );
-
-    await expect(el.children.length).to.be.equal(1);
-    el.clearChildren();
-
-    await aTimeout(400);
-
-    await expect(el.children.length).to.be.equal(0);
-  });
-
   describe("can add new toasts", () => {
     it("with default settings", async () => {
       const el = await fixture(
@@ -110,18 +97,5 @@ describe("auro-toaster", () => {
       await expect(el.children.length).to.be.equal(1);
       await expect(toast.getAttribute("persistent")).to.be.equal("true");
     });
-  });
-
-  it("can clear toasts manually", async () => {
-    const el = await fixture(
-      html`<auro-toaster><auro-toast></auro-toast></auro-toaster>`
-    );
-
-    await expect(el.children.length).to.be.equal(1);
-    el.clearChildren();
-
-    await aTimeout(400);
-
-    await expect(el.children.length).to.be.equal(0);
   });
 });

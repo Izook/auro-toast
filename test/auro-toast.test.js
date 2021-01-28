@@ -75,20 +75,6 @@ describe("auro-toast", () => {
   });
 
   describe("handles dismissal", () => {
-    it("from attribute", async () => {
-      const el = await fixture(
-        html`<div><auro-toast dismiss></auro-toast></div>`
-      );
-      const root = el.querySelector("auro-toast").shadowRoot;
-      const toast = root.querySelector(".toast");
-
-      await expect([...toast.classList]).to.contain("isCleared");
-      await expect(el.children.length).to.be.equal(1);
-
-      await aTimeout(300);
-
-      await expect(el.children.length).to.be.equal(0);
-    });
 
     it("from timeout", async () => {
       const el = await fixture(

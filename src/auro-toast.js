@@ -61,7 +61,7 @@ class AuroToast extends LitElement {
      */
     this.dismissed = false;
 
-    this.setDefaultProperties();
+    this.setDefaultPublicProperties();
   }
 
 
@@ -69,13 +69,12 @@ class AuroToast extends LitElement {
    * @private function to set default properties within the constructor
    * @returns {void}
    */
-  setDefaultProperties() {
+  setDefaultPublicProperties() {
     // default properties
     this.info = false;
     this.warning = false;
     this.error = false;
     this.duration = 5;
-    this.dismiss = false;
     this.persistent = false;
   }
 
@@ -88,7 +87,6 @@ class AuroToast extends LitElement {
       warning: { type: Boolean },
       error: { type: Boolean },
       duration: { type: Number },
-      dismiss: { type: Boolean },
       persistent: { type: Boolean },
     };
   }
@@ -203,13 +201,6 @@ class AuroToast extends LitElement {
         </button>
       </div>
     `;
-  }
-
-  // function that is called when the elements DOM has been updated and rendered
-  updated() {
-    if (this.dismiss) {
-      this.dismissToast();
-    }
   }
 }
 
