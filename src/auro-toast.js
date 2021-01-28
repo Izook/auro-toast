@@ -175,7 +175,6 @@ class AuroToast extends LitElement {
       /* istanbul ignore next */
       default:
         this.svg = this.generateIconHtml(information.svg);
-        break;
     }
   }
 
