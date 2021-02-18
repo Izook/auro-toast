@@ -17,9 +17,12 @@ import information from "@alaskaairux/icons/dist/icons/alert/information-stroke_
 import warning from "@alaskaairux/icons/dist/icons/alert/warning-stroke_es6";
 import error from "@alaskaairux/icons/dist/icons/alert/error_es6";
 
+// Import Swipe Detection
+import { makeSwipeable } from "./swipeable";
+
 // Timing constants
-const DELAY = 100,
-  DISMISS_DURATION = 300,
+const AURO_DEFAULT_ANIMATION_DURATION = 300,
+  DELAY = 100,
   MS = 1000;
 
 /**
@@ -64,7 +67,6 @@ class AuroToast extends LitElement {
     this.setDefaultPublicProperties();
   }
 
-
   /**
    * @private function to set default properties within the constructor
    * @returns {void}
@@ -78,7 +80,6 @@ class AuroToast extends LitElement {
     this.persistent = false;
   }
 
-
   // function to define props used within the scope of this component
   static get properties() {
     return {
@@ -91,13 +92,11 @@ class AuroToast extends LitElement {
     };
   }
 
-
   static get styles() {
     return css`
       ${styleCss}
     `;
   }
-
 
   /**
    * @private Internal function to generate the HTML for the icon to use
@@ -111,13 +110,19 @@ class AuroToast extends LitElement {
     return svg;
   }
 
-
   // This function applies styles after the components loads to animate the component and
   // it starts its dismissal timer.
   firstUpdated() {
+    makeSwipeable(
+      this.shadowRoot.querySelector(".toast"),
+      this.dismissToast.bind(this)
+    );
     setTimeout(() => {
       this.shadowRoot.querySelector(".toast").style.transform = `translateX(0%)`;
     }, DELAY);
+    setTimeout(() => {
+      this.shadowRoot.querySelector(".toast").style.transition = `none`;
+    }, DELAY + AURO_DEFAULT_ANIMATION_DURATION);
     if (!this.persistent) {
       setTimeout(() => {
         this.shadowRoot.querySelector(".timeRemaining").style.transition = `height ${this.duration}s linear`;
@@ -129,7 +134,6 @@ class AuroToast extends LitElement {
         }, this.duration * MS));
     }
   }
-
 
   /**
    * @private function to dismiss toast by animating dissapearance and removing component from DOM
@@ -145,10 +149,9 @@ class AuroToast extends LitElement {
           clearTimeout(timeoutId);
         });
         this.parentNode.removeChild(this);
-      }, DISMISS_DURATION);
+      }, AURO_DEFAULT_ANIMATION_DURATION);
     }
   }
-
 
   /**
    * @private function to update the type of the toast based on attributes
@@ -183,7 +186,7 @@ class AuroToast extends LitElement {
     this.updateType();
 
     return html`
-      <div id="toast" class="toast toast--${this.type}" role="log">
+      <div class="toast toast--${this.type}" role="log" draggable="true">
         <div class="timer">
           <div class="timeRemaining"></div>
           <div class="icon">${this.svg}</div>

@@ -109,3 +109,7 @@ Open [localhost:3001](http://localhost:3001/)
 ### Testing
 
 Automated tests are required for every Auro component. See `.\test\auro-toast.test.js` for the tests for this component. Run `npm test` to run the tests and check code coverage. Tests must pass and meet a certain coverage threshold to commit. See [the testing documentation](https://auro.alaskaair.com/support/tests) for more details.
+
+### Known Issues
+
+- `dragstart` event doesn't fire on desktop chrome and edge when clicking over message text (slot), but it will fire if clicking on whitespace outside of text. Impact: swiping is a little more difficult with a mouse. Possible solutions: place slot into hidden element and duplicate contents into message element.

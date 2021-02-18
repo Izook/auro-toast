@@ -16,7 +16,8 @@
   align-items: stretch;
   align-content: center;
   height: auto;
-  width: 360px;
+  width: 100%;
+  max-width: 360px;
   overflow: hidden;
 
   border-radius: var(--auro-border-radius);
@@ -24,7 +25,8 @@
 
   margin: var(--auro-size-xs) 0;
   transform: translateX(-100%);
-  transition: transform var(--auro-animation-default-duration) var(--auro-animation-default-timing);
+  transition: transform var(--auro-animation-default-duration)
+    var(--auro-animation-default-timing);
 }
 
 .timer {
@@ -64,7 +66,8 @@
   outline: none;
   background: none;
   color: inherit;
-  transition: background-color var(--auro-animation-default-duration) var(--auro-animation-default-timing);
+  transition: background-color var(--auro-animation-default-duration)
+    var(--auro-animation-default-timing);
 }
 
 /* ============================================= */
