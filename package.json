@@ -7,7 +7,7 @@
     "  3. Go to http://localhost:3001",
     "================================================================================"
   ],
-  "name": "@alaskaairux/auro-toast",
+  "name": "@aurolabs/auro-toast",
   "version": "0.0.0",
   "description": "Auro custom auro-toast element",
   "author": "Product design and research",
